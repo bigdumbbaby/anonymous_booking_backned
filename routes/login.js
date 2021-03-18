@@ -19,6 +19,7 @@ router.post('/', (request, response) => {
     .first()
     .then(retrievedUser => {
       if(!retrievedUser) throw new Error("No User!")
+
       return Promise.all([
         bcrypt.compare(owner.password, retrievedUser.password_hash),
         Promise.resolve(retrievedUser),
@@ -26,6 +27,7 @@ router.post('/', (request, response) => {
     }).then(results => {
       const arePasswordsTheSame = results[0]
       const owner = results[1]
+      
       if(!arePasswordsTheSame) throw new Error("Wrong password!")
 
       const payload = {username: owner.username}

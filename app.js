@@ -16,7 +16,7 @@ app.use(express.json())
 
 app.use('/owners', ownerRouter)
 app.use('/login', loginRouter)
-app.use('/secret-route', secretRouter)
+app.use('/secretRoute', secretRouter)
 
 app.listen(port, () => {
   console.log(`LISTENING ON PORT ${port}`)
