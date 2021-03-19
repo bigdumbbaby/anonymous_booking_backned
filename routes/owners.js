@@ -19,22 +19,37 @@ router.get('/:id', (req, res) => {
 
 router.post('/', (request, response) => {
   const { owner } = request.body
-  bcrypt.hash(owner.password, 12)
-    .then(hashedPassword => {
-      return database('owner')
-        .insert({
-          username: owner.username,
-          email: owner.email,
-          password_hash: hashedPassword,
-        }).returning('*')
+  if(owner.username === "" || password === ""){
+    response.json({ message: "needs username and password" })
+  } else {
+    database('owner')
+      .select()
+      .where({ username: owner.username})
+      .then()
+      .first()
+      .then(retrievedUser => {
+        if(retrievedUser){
+          response.json({ message: "user already exists" })
+        } else {
+          bcrypt.hash(owner.password, 12)
+          .then(hashedPassword => {
+            return database('owner')
+              .insert({
+                username: owner.username,
+                email: owner.email,
+                password_hash: hashedPassword,
+              }).returning('*')
+            })
+            .then((owners) => {
+              const owner = owners[0]
+        
+              response.json({ owner })
+            }).catch(error => {
+              response.json({ error: error.messgae })
+            })
+        }
       })
-      .then((owners) => {
-        const owner = owners[0]
-  
-        response.json({ owner })
-      }).catch(error => {
-        response.json({ error: error.messgae })
-      })
+  }
 })
 
 module.exports = router;
