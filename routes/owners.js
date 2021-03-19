@@ -19,13 +19,12 @@ router.get('/:id', (req, res) => {
 
 router.post('/', (request, response) => {
   const { owner } = request.body
-  if(owner.username === "" || password === ""){
+  if(owner.username === "" || owner.password === ""){
     response.json({ message: "needs username and password" })
   } else {
     database('owner')
       .select()
       .where({ username: owner.username})
-      .then()
       .first()
       .then(retrievedUser => {
         if(retrievedUser){
