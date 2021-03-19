@@ -1,7 +1,7 @@
 const router = require('express').Router();
 
 const knex = require('knex')
-const config = require('../knexfile').development
+const config = require('../knexfile')[process.env.NODE_ENV || 'development']
 const database = knex(config)
 
 const bodyParser = require('body-parser')
@@ -11,7 +11,7 @@ const jwt = require('jsonwebtoken')
 router.use(bodyParser.json())
 
 router.get('/', authenticate, (request, response) => {
-  response.json({ message: `${request.owner.username} found me Lucky Charms!`})
+  response.json({ message: `${request.owner.username} found me`})
 })
 
 function authenticate(request, response, next){
