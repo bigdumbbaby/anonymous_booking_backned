@@ -11,7 +11,7 @@ const jwt = require('jsonwebtoken')
 router.use(bodyParser.json())
 
 router.get('/', authenticate, (request, response) => {
-  response.json({ message: `${request.owner.username} found me`})
+  response.json(request.owner)
 })
 
 function authenticate(request, response, next){
