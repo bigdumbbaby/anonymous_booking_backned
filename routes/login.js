@@ -11,14 +11,14 @@ const jwt = require('jsonwebtoken')
 router.use(bodyParser.json())
 
 router.post('/', (request, response) => {
-  const data = {}
-  const databaseSelector = ''
+  let data = {}
+  let databaseSelector = ''
   if(request.body.owner){
-    data = request.body.owner
-    databaseSelector = 'owner'
+    data = request.body.owner;
+    databaseSelector = 'owner';
   } else {
-    data = request.body.artist
-    databaseSelector = 'artist'
+    data = request.body.artist;
+    databaseSelector = 'artist';
   }
   database(databaseSelector)
     .select()
