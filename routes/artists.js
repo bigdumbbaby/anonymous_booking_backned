@@ -31,7 +31,7 @@ router.post('/', (request, response) => {
         if(retrievedUser){
           response.json({ message: "user already exists" })
         } else {
-          bcrypt.hash(artis.password, 12)
+          bcrypt.hash(artist.password, 12)
           .then(hashedPassword => {
             return database('artist')
               .insert({
