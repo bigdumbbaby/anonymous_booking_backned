@@ -1,4 +1,5 @@
 const router = require('express').Router();
+const auth = require('../utility/authenticate')
 
 const knex = require('knex')
 const config = require('../knexfile')[process.env.NODE_ENV || 'development']
@@ -9,7 +10,7 @@ const bcrypt = require('bcrypt')
 
 router.use(bodyParser.json())
 
-router.get('/', (request, response) => {
+router.get('/', auth.authenticate, (request, response) => {
   database('owner')
     .then(owners => response.send(owners))
 })
