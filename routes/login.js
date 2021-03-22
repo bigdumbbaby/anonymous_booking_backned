@@ -11,33 +11,40 @@ const jwt = require('jsonwebtoken')
 router.use(bodyParser.json())
 
 router.post('/', (request, response) => {
-  const { owner } = request.body
-  console.log(owner)
-  database('owner')
+  const data = {}
+  const databaseSelector = ''
+  if(request.body.owner){
+    data = request.body.owner
+    databaseSelector = 'owner'
+  } else {
+    data = request.body.artist
+    databaseSelector = 'artist'
+  }
+  database(databaseSelector)
     .select()
-    .where({ username: owner.username})
+    .where({ username: data.username})
     .first()
     .then(retrievedUser => {
       if(!retrievedUser) throw new Error("No User!")
 
       return Promise.all([
-        bcrypt.compare(owner.password, retrievedUser.password_hash),
+        bcrypt.compare(data.password, retrievedUser.password_hash),
         Promise.resolve(retrievedUser),
       ])
     }).then(results => {
       const arePasswordsTheSame = results[0]
-      const owner = results[1]
+      const data = results[1]
       
       if(!arePasswordsTheSame) throw new Error("Wrong password!")
 
-      const payload = {username: owner.username}
+      const payload = {username: data.username}
       // const secret = "QUIET"
       const secret = process.env.SECRET
 
       jwt.sign(payload, secret, (error, token) => {
         if (error) throw new Error("Signing didn't work")
 
-        response.json({ user: owner, token: token })
+        response.json({ user: data, token: token })
       })
     })
     .catch(error => {

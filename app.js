@@ -10,6 +10,7 @@ const port = process.env.PORT || 3000
 const ownerRouter = require('./routes/owners')
 const loginRouter = require('./routes/login')
 const secretRouter = require('./routes/secret-route')
+const artistRouter = require('./routes/artists')
 
 app.use(cors())
 app.use(express.json())
@@ -17,6 +18,7 @@ app.use(express.json())
 app.use('/owners', ownerRouter)
 app.use('/login', loginRouter)
 app.use('/secretRoute', secretRouter)
+app.use('/artists', artistRouter)
 
 app.listen(port, () => {
   console.log(`LISTENING ON PORT ${port}`)
