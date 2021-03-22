@@ -31,4 +31,4 @@ function authenticate(request, response, next){
   }) 
 }
 
-module.exports = router;
+module.exports = authenticate;
