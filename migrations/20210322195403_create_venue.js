@@ -4,7 +4,6 @@ exports.up = function(knex) {
     t.increments('id')
     t.string('name')
     t.integer('owner_id').references('id').inTable('owner')
-    t.string('password_hash')
     t.string('address')
     t.string('city')
     t.string('state')
