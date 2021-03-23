@@ -57,3 +57,5 @@ router.post('/', (request, response) => {
       })
   }
 })
+
+module.exports = router;
