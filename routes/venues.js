@@ -28,9 +28,9 @@ router.post('/', (request, response) => {
     .insert({
       name: venue.name,
       owner_id: venue.owner_id,
-      address: venuer.address,
-      city: venuer.city,
-      state: venuer.state,
+      address: venue.address,
+      city: venue.city,
+      state: venue.state,
       zip: venue.zip,
       type: venue.type,
     })
