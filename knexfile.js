@@ -1,6 +1,6 @@
 // Update with your config settings.
 const pg = require('pg')
-// pg.defaults.ssl = { require: true, rejectUnauthorized: false }
+pg.defaults.ssl = { require: true, rejectUnauthorized: false }
 
 module.exports = {
 
