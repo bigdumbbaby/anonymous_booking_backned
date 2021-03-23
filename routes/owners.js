@@ -53,18 +53,21 @@ router.post('/', (request, response) => {
 })
 
 router.post('/addVenueId', (request, response) => {
-  const { owner, id } = request.body
-  response.json({message: "test"})
-  database('owner')
-    .select()
-    .where({ username: owner.username })
-    .update({
-      venue_id: id
-    })
-    .returning('*')
-    .then(user => {
-      response.json(user)
-    })
+  const { owner, venue_id } = request.body
+  if(venue_id){
+    database('owner')
+      .select()
+      .where({ username: owner.username })
+      .update({
+        venue_id: venue_id
+      })
+      .returning('*')
+      .then(user => {
+        response.json(user)
+      })
+    } else {
+      response.json({ error: "need venue id" })
+    }
 })
 
 module.exports = router;
