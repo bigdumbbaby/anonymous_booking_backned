@@ -25,36 +25,24 @@ router.post('/', (request, response) => {
     response.json({ message: "Insufficient information" })
   } else {
     database('venue')
-      .select()
-      .where({ name: venue.name})
-      .first()
-      .then(retrievedUser => {
-        if(retrievedUser){
-          response.json({ message: "user already exists" })
-        } else {
-          bcrypt.hash(venue.password, 12)
-          .then(hashedPassword => {
-            return database('venue')
-              .insert({
-                name: venue.name,
-                owner_id: venue.owner_id,
-                password_hash: hashedPassword,
-                address: venuer.address,
-                city: venuer.city,
-                state: venuer.state,
-                zip: venue.zip,
-                type: venue.type,
-              }).returning('*')
-            })
-            .then((owners) => {
-              const venue = owners[0]
-        
-              response.json({ venue })
-            }).catch(error => {
-              response.json({ error: error.messgae })
-            })
-        }
-      })
+    .insert({
+      name: venue.name,
+      owner_id: venue.owner_id,
+      address: venuer.address,
+      city: venuer.city,
+      state: venuer.state,
+      zip: venue.zip,
+      type: venue.type,
+    })
+    .returning('*')
+    .then((owners) => {
+      const venue = owners[0]
+
+      response.json({ venue })
+    })
+    .catch(error => {
+      response.json({ error: error.messgae })
+    })
   }
 })
 
