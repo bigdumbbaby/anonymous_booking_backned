@@ -5,6 +5,7 @@ exports.up = function(knex) {
     t.string('username')
     t.string('email')
     t.string('password_hash')
+    t.integer('venue_id')
   })
 };
 
