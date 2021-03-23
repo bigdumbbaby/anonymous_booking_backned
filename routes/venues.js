@@ -18,6 +18,7 @@ router.get('/', (request, response) => {
 router.post('/', (request, response) => {
   const { venue } = request.body
   if(venue.name === "" || 
+  !venue.name ||
   venue.address === "" || 
   venue.city === "" || 
   venue.state === "" || 
