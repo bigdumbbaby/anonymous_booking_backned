@@ -42,6 +42,8 @@ router.post('/', (request, response) => {
         .select()
         .where({id: venue.owner_id})
         .update({venue_id: venue.id})
+        .returning('*')
+        .then(owner => response.json({ owner}))
       
       response.json({ venue })
     })
