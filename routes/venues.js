@@ -45,7 +45,7 @@ router.post('/', (request, response) => {
         .returning('*')
         .then(owner => response.json({ owner}))
       
-      // response.json({ venue })
+      response.json(response, { venue })
     })
     .catch(error => {
       response.json({ error: error.messgae })
