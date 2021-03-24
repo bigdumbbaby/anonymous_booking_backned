@@ -44,12 +44,12 @@ router.post('/', auth, (request, response) => {
         .update({venue_id: venue.id})
         .returning('*')
         .then(owner => {
-          response.json({venue, owner})
+          response.json({venue, owner: owner[0]})
         })
       
     })
     .catch(error => {
-      response.json({ error: error.messgae })
+      response.json({ error: error.message })
     })
   }
 })
