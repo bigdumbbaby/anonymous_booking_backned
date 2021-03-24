@@ -38,10 +38,11 @@ router.post('/', (request, response) => {
     .returning('*')
     .then((venues) => {
       const venue = venues[0]
-      database('owners')
+      database('owner')
         .select()
         .where({id: venue.owner_id})
         .update({venue_id: venue.id})
+      
       response.json({ venue })
     })
     .catch(error => {
