@@ -15,7 +15,7 @@ router.get('/', (request, response) => {
     .then(venues => response.send(venues))
 })
 
-router.post('/', (request, response) => {
+router.post('/', auth, (request, response) => {
   const { venue } = request.body
   if(venue.name === "" || 
   !venue.name ||
