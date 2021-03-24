@@ -36,14 +36,18 @@ router.post('/', (request, response) => {
       type: venue.type,
     })
     .returning('*')
-    .then((owners) => {
-      const venue = owners[0]
-
+    .then((venues) => {
+      const venue = venues[0]
+      database('owners')
+        .select()
+        .where({id: venue.owner_id})
+        .update({venue_id: venue.id})
       response.json({ venue })
     })
     .catch(error => {
       response.json({ error: error.messgae })
     })
+    .then()
   }
 })
 
