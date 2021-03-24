@@ -43,9 +43,10 @@ router.post('/', auth, (request, response) => {
         .where({id: venue.owner_id})
         .update({venue_id: venue.id})
         .returning('*')
-        .then(owner => venue = {venue, owner})
+        .then(owner => {
+          response.json({venue, owner})
+        })
       
-      response.json({venue})
     })
     .catch(error => {
       response.json({ error: error.messgae })
