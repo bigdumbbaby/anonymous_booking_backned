@@ -47,7 +47,6 @@ router.post('/', (request, response) => {
     .catch(error => {
       response.json({ error: error.messgae })
     })
-    .then()
   }
 })
 
