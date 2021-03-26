@@ -22,7 +22,8 @@ router.post('/', auth, (request, response) => {
   venue.address === "" || 
   venue.city === "" || 
   venue.state === "" || 
-  venue.zip === ""){
+  venue.zip === "" ||
+  venue.image_link === ""){
     response.json({ message: "Insufficient information" })
   } else {
     database('venue')
@@ -34,6 +35,7 @@ router.post('/', auth, (request, response) => {
       state: venue.state,
       zip: venue.zip,
       type: venue.type,
+      image_link: venue.image_link,
     })
     .returning('*')
     .then((venues) => {

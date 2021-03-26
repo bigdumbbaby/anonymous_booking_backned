@@ -9,6 +9,7 @@ exports.up = function(knex) {
     t.string('state')
     t.integer('zip')
     t.string('type')
+    t.string('image_link')
   })
 };
 
