@@ -22,7 +22,7 @@ router.post('/', auth, (request, response) => {
     connection.message === ""){
     response.json({ message: "Insufficient information" })
   } else {
-    database('')
+    database('connection')
     .insert({
       owner_id: connection.owner_id,
       artist_id: connection.artist_id,
@@ -33,8 +33,8 @@ router.post('/', auth, (request, response) => {
     })
     .returning('*')
     .then((connections) => {
-      const connection = connections[0]
-      response.json({connection})
+      const connectionReturn = connections[0]
+      response.json({connectionReturn})
     })
     .catch(error => {
       response.json({ error: error.message })
