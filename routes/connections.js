@@ -22,7 +22,7 @@ router.post('/', auth, (request, response) => {
     connection.message === ""){
     response.json({ message: "Insufficient information" })
   } else {
-    database('venue')
+    database('')
     .insert({
       owner_id: connection.owner_id,
       artist_id: connection.artist_id,
