@@ -58,14 +58,14 @@ router.post('/getMyConnections', (request, response) => {
           .then(output => {
             artists = [...artists, output[0]]
             console.log(artists)
-          })
-          .then(() => {
-            response.json({connections: output, artists: artists})
           }).catch(error => {
             response.json({ error: error.messgae })
           })
       })
-    }).catch(error => {
+    }).then(() => {
+      response.json({connections: output, artists: artists})
+    })
+    .catch(error => {
       response.json({ error: error.messgae })
     })
 })
