@@ -17,7 +17,7 @@ router.get('/', auth, (request, response) => {
 })
 
 router.get('/:id', (req, res) => {
-  response.json(this.param(id))
+  response.json(this.param({id}))
   // database('artist')
   //   .select()
   //   .where({id: this.param(id)})
