@@ -43,7 +43,7 @@ router.post('/', auth, (request, response) => {
   }
 })
 
-router.get('/getMyConnections', (request, response) => {
+router.post('/getMyConnections', (request, response) => {
   const { my_id } = request.body
   database('connection')
     .select()
