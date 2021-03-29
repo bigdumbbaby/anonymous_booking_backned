@@ -49,9 +49,8 @@ router.post('/getMyConnections', (request, response) => {
     .select()
     .where({ owner_id: my_id })
     .then(output => {
-      let artists = []
       // response.json(output)
-      output.map(connection => {
+      artists = output.map(connection => {
         database('artist')
           .select()
           .where({id: connection.artist_id})
@@ -59,13 +58,9 @@ router.post('/getMyConnections', (request, response) => {
             artists = [...artists, output[0]]
             console.log(artists)
           })
-          .then(() => {
-            response.json({connections: output, artists: artists})
-          })
-          .catch(error => {
-            response.json({ error: error.messgae })
-          })
       })
+      console.log(artists)
+      response.json({connections: output, artists: artists})
     })
     .catch(error => {
       response.json({ error: error.messgae })
