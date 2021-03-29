@@ -50,6 +50,8 @@ router.get('/getMyConnections', (request, response) => {
     .where({ owner_id: my_id })
     .then(output => {
       response.json({test: "test"})
+    }).catch(error => {
+      response.json({ error: error.messgae })
     })
 })
 
