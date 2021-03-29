@@ -17,13 +17,12 @@ router.get('/', auth, (request, response) => {
 })
 
 router.put('/:id', (request, response) => {
-  response.json(request.params.id)
-  // database('artist')
-  //   .select()
-  //   .where({id: this.param(id)})
-  //   .then(retrievedArtist => {
-  //     response
-  //   })
+  database('artist')
+    .select()
+    .where({id: request.params.id})
+    .then(retrievedArtist => {
+      response.json(retrievedArtist)
+    })
 })
 
 router.post('/', (request, response) => {
