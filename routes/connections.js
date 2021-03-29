@@ -49,14 +49,7 @@ router.post('/getMyConnections', (request, response) => {
     .select()
     .where({ owner_id: my_id })
     .then(output => {
-      
-      output.map(connection => {
-        const {artist_id} = connection.artist_id
-        database('artist')
-          .select()
-          .where({id: artist_id})
-          .then(artist => response.json({output, artist}))
-      })
+      response.json(output)
     }).catch(error => {
       response.json({ error: error.messgae })
     })
