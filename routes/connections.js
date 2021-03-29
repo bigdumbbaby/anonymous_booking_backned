@@ -56,7 +56,7 @@ router.post('/getMyConnections', (request, response) => {
           .select()
           .where({id: connection.artist_id})
           .then(output => {
-            console.log(output)
+            console.log(output[0])
             artists = output
           })
       })
