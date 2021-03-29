@@ -6,7 +6,8 @@ const config = require('../knexfile')[process.env.NODE_ENV || 'development']
 const database = knex(config)
 
 const bodyParser = require('body-parser')
-const bcrypt = require('bcrypt')
+const bcrypt = require('bcrypt');
+const { response } = require('express');
 
 router.use(bodyParser.json())
 
@@ -16,6 +17,13 @@ router.get('/', auth, (request, response) => {
 })
 
 router.get('/:id', (req, res) => {
+  response.json(this.param(id))
+  // database('artist')
+  //   .select()
+  //   .where({id: this.param(id)})
+  //   .then(retrievedArtist => {
+  //     response
+  //   })
 })
 
 router.post('/', (request, response) => {
