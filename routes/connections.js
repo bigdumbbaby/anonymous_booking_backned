@@ -49,8 +49,8 @@ router.get('/getMyConnections', (request, response) => {
     .select()
     .where({ owner_id: my_id })
     .returning('*')
-    .then(connections => {
-      response.json(connections)
+    .then(output => {
+      response.json(output)
     })
 })
 
