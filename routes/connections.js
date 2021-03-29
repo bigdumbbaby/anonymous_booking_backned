@@ -49,7 +49,7 @@ router.get('/getMyConnections', (request, response) => {
     .select()
     .where({ owner_id: my_id })
     .then(output => {
-      response.json(output)
+      response.json({test: "test"})
     })
 })
 
