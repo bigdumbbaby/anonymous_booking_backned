@@ -44,8 +44,8 @@ router.post('/', auth, (request, response) => {
 })
 
 router.post('/getMyConnections', (request, response) => {
-  const { my_id } = request.body
-  response.json(my_id)
+  // const { my_id } = request.body
+  response.json({ test: "test response" })
   // database('connections')
   //   .select()
   //   .where({ owner_id: my_id })
