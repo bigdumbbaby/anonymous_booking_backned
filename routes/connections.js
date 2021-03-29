@@ -50,7 +50,7 @@ router.post('/getMyConnections', (request, response) => {
     .where({ owner_id: my_id })
     .returning('*')
     .then(connections => {
-      response.json(conncetions)
+      response.json(connections)
     })
 }
 
