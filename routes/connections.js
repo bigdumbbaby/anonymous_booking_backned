@@ -45,7 +45,7 @@ router.post('/', auth, (request, response) => {
 
 router.get('/getMyConnections', (request, response) => {
   const { my_id } = request.body
-  database('connections')
+  database('connection')
     .select()
     .where({ owner_id: my_id })
     .then(output => {
