@@ -16,7 +16,7 @@ router.get('/', auth, (request, response) => {
     .then(artists => response.send(artists))
 })
 
-router.put('/:id', (req, res) => {
+router.put('/:id', (request, response) => {
   response.json(request.params.id)
   // database('artist')
   //   .select()
