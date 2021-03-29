@@ -6,7 +6,8 @@ const config = require('../knexfile')[process.env.NODE_ENV || 'development']
 const database = knex(config)
 
 const bodyParser = require('body-parser')
-const bcrypt = require('bcrypt')
+const bcrypt = require('bcrypt');
+const { route } = require('./owners');
 
 router.use(bodyParser.json())
 
@@ -41,5 +42,16 @@ router.post('/', auth, (request, response) => {
     })
   }
 })
+
+router.post('/getMyConnections', (request, response) => {
+  const { my_id } = request.body
+  database('connections')
+    .select()
+    .where({ owner_id: my_id })
+    .returning('*')
+    .then(connections => {
+      response.json(conncetions)
+    })
+}
 
 module.exports = router;
