@@ -45,15 +45,14 @@ router.post('/', auth, (request, response) => {
 
 router.get('/getMyConnections', (request, response) => {
   const { my_id } = request.body
-  response.json({test: "message"})
-  // database('connections')
-  //   .select()
-  //   .where({ owner_id: my_id })
-  //   .then(output => {
-  //     response.json({test: "test"})
-  //   }).catch(error => {
-  //     response.json({ error: error.messgae })
-  //   })
+  database('connections')
+    .select()
+    .where({ owner_id: my_id })
+    .then(output => {
+      response.json({test: "test"})
+    }).catch(error => {
+      response.json({ error: error.messgae })
+    })
 })
 
 module.exports = router;
