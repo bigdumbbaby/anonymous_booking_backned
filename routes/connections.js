@@ -52,11 +52,11 @@ router.post('/getMyConnections', (request, response) => {
       let artists = []
       // response.json(output)
       output.map(connection => {
-        console.log(connection.artist_id)
         database('artist')
           .select()
           .where({id: connection.artist_id})
           .then(output => {
+            console.log(output)
             artists = output
           })
       })
