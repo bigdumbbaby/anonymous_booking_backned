@@ -49,12 +49,16 @@ router.post('/getMyConnections', (request, response) => {
     .select()
     .where({ owner_id: my_id })
     .then(output => {
-      let artists = []
       return Promise.all(output.map(connection => {
         return database('artist')
           .select()
           .where({id: connection.artist_id})
-          .then(artist => artist)
+          .then(artist => {
+            return {
+              ...connection, 
+              artist
+            }
+          })
       }))
       .then((connections) => {
         response.json(connections)
