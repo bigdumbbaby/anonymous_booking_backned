@@ -56,11 +56,13 @@ router.post('/getMyConnections', (request, response) => {
           .select()
           .where({id: connection.artist_id})
           .then(output => {
-            console.log(output[0])
-            artists = output
+            artists = [...artists, output[0]]
+            console.log(artists)
+          })
+          .then(() => {
+            response.json({connections: output, artists: artists})
           })
       })
-      response.json({connections: output, artists: artists})
     }).catch(error => {
       response.json({ error: error.messgae })
     })
