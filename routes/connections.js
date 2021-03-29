@@ -53,6 +53,6 @@ router.get('/getMyConnections', (request, response) => {
   //   .then(connections => {
   //     response.json(connections)
   //   })
-}
+})
 
 module.exports = router;
