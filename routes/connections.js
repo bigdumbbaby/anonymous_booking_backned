@@ -59,7 +59,7 @@ router.post('/getMyConnections', (request, response) => {
             artists = output
           })
       })
-      response.json(artists)
+      response.json({connections: output, artists: artists})
     }).catch(error => {
       response.json({ error: error.messgae })
     })
