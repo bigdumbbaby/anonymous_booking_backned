@@ -45,14 +45,13 @@ router.post('/', auth, (request, response) => {
 
 router.get('/getMyConnections', (request, response) => {
   const { my_id } = request.body
-  response.json(my_id)
-  // database('connections')
-  //   .select()
-  //   .where({ owner_id: my_id })
-  //   .returning('*')
-  //   .then(connections => {
-  //     response.json(connections)
-  //   })
+  database('connections')
+    .select()
+    .where({ owner_id: my_id })
+    .returning('*')
+    .then(connections => {
+      response.json(connections)
+    })
 })
 
 module.exports = router;
