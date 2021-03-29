@@ -56,7 +56,7 @@ router.post('/getMyConnections', (request, response) => {
           .then(artist => {
             return {
               ...connection, 
-              artist[0]
+              artist
             }
           })
       }))
