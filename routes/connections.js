@@ -60,19 +60,20 @@ router.put('/:id', (request,response) => {
     .update({is_approved: true})
     .returning('*')
     .then(data => {
-      return Promise.all(data.map((data) => {
-        return database('artist')
-          .select()
-          .where({id: data.artist_id})
-          .then(artist => {
-            return {
-              ...data,
-              artist
-            }
-          })
-      })
+      return database('artist')
+        .select()
+        .where({id: data.artist_id})
+        .then(artist => {
+          return {
+            data,
+            artist
+          }
+        })
     })
-    .then((connections) => {response.json(connections)})
+    .then((connections) => {
+      console.log(connections)
+      response.json(connections)
+    })
 })
 
 router.post('/checkForConnection', (request, response) => {
