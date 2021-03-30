@@ -49,7 +49,7 @@ router.put('/:id', (request,response) => {
     .where({id: request.params.id})
     .update({is_approved: true})
     .returning('*')
-    .then(data => request.send(data))
+    .then(data => response.json(data))
 })
 
 router.post('/checkForConnection', (request, response) => {
