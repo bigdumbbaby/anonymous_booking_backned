@@ -47,7 +47,7 @@ router.post('/', auth, (request, response) => {
 router.put('/:id', (request,response) => {
   database('connection')
     .where({id: request.params.id})
-    .update({is_approved: true})
+    // .update({is_approved: true})
     .returning('*')
     .then(data => {
       // response.json(data)
@@ -63,8 +63,9 @@ router.put('/:id', (request,response) => {
           })   
       })
     })
-    .then(connections => {
-      response.json(connections)
+    .then((connection) => {
+      console.log(connection)
+      response.json(connection)
     })
 })
 
