@@ -60,7 +60,7 @@ router.put('/:id', (request,response) => {
     .update({is_approved: true})
     .returning('*')
     .then(data => {
-      return Promise.all(() => {
+      return Promise.all(data.map((data) => {
         return database('artist')
           .select()
           .where({id: data.artist_id})
