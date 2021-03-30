@@ -44,14 +44,35 @@ router.post('/', auth, (request, response) => {
   }
 })
 
+// router.put('/:id', (request,response) => {
+//   database('connection')
+//     .where({id: request.params.id})
+//     .update({is_approved: true})
+//     .returning('*')
+//     .then(data => {
+//       response.json(data)
+//     })
+// })
+
 router.put('/:id', (request,response) => {
   database('connection')
     .where({id: request.params.id})
     .update({is_approved: true})
     .returning('*')
     .then(data => {
-      response.json(data)
+      return Promise.all(() => {
+        return database('artist')
+          .select()
+          .where({id: data.artist_id})
+          .then(artist => {
+            return {
+              ...data,
+              artist
+            }
+          })
+      })
     })
+    .then((connections) => {response.json(connections)})
 })
 
 router.post('/checkForConnection', (request, response) => {
