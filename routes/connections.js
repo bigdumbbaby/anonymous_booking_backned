@@ -60,13 +60,12 @@ router.put('/:id', (request,response) => {
     .update({is_approved: true})
     .returning('*')
     .then(data => {
-      console.log(data)
       return database('artist')
         .select()
-        .where({id: data.artist_id})
+        .where({id: data[0].artist_id})
         .then(artist => {
           return {
-            data,
+            ...data[0],
             artist
           }
         }).catch((err) => {

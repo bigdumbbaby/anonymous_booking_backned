@@ -10,6 +10,7 @@ const bcrypt = require('bcrypt')
 
 router.use(bodyParser.json())
 
+
 router.get('/', auth, (request, response) => {
   database('owner')
     .then(owners => response.send(owners))
