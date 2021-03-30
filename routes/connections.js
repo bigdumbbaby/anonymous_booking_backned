@@ -49,8 +49,11 @@ router.post('/checkForConnection', (request, response) => {
     .select()
     .where({owner_id: owner_id, artist_id: artist_id})
     .then(output => {
-      console.log(output)
-      response.json(output)
+      if(output.length>1){
+        response.json(true)
+      } else {
+        response.json(false)
+      }
     })
 })
 
