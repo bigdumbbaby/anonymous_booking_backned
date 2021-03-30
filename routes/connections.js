@@ -52,7 +52,7 @@ router.put('/:id', (request,response) => {
     .then(data => {
       // response.json(data)
       Promise.all(() => {
-        return database('artists')
+        return database('artist')
           .select()
           .where({id: data.artist_id})
           .then(artist => {
