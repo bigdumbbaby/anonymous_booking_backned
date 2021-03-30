@@ -48,7 +48,6 @@ router.put('/:id', (request,response) => {
   database('connection')
     .where({id: request.params.id})
     // .update({is_approved: true})
-    .returning('*')
     .then(data => {
       // response.json(data)
       Promise.all(() => {
