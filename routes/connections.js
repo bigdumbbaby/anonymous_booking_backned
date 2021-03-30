@@ -56,6 +56,7 @@ router.put('/:id', (request,response) => {
           .select()
           .where({id: data.artist_id})
           .then(artist => {
+            console.log(artist)
             return {
               ...data,
               artist
