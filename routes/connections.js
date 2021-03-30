@@ -49,7 +49,18 @@ router.put('/:id', (request,response) => {
     .where({id: request.params.id})
     .update({is_approved: true})
     .returning('*')
-    .then(data => response.json(data))
+    .then(data => {
+      // response.json(data)
+      return database('artist')
+        .select()
+        .where({id: connection.artist_id})
+        .then(artist => {
+          return {
+            ...data,
+              artist
+          }
+        })
+    })
 })
 
 router.post('/checkForConnection', (request, response) => {
