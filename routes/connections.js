@@ -43,6 +43,17 @@ router.post('/', auth, (request, response) => {
   }
 })
 
+router.post('/checkForConnection', (request, response) => {
+  const {owner_id, artist_id} = request.body
+  database('connection')
+    .select()
+    .where({owner_id: owner_id, artist_id: artist_id})
+    .then(output => {
+      console.log(output)
+      response.json(output)
+    })
+})
+
 router.post('/getMyConnections', (request, response) => {
   const { my_id } = request.body
   database('connection')
