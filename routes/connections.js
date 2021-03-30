@@ -51,15 +51,17 @@ router.put('/:id', (request,response) => {
     .returning('*')
     .then(data => {
       // response.json(data)
-      return database('artist')
-        .select()
-        .where({id: connection.artist_id})
-        .then(artist => {
-          return {
-            ...data,
-              artist
-          }
-        })
+      return Promise.all(
+        database('artist')
+          .select()
+          .where({id: connection.artist_id})
+          .then(artist => {
+            return {
+              ...data,
+                artist
+            }
+          })
+      )
     })
 })
 
