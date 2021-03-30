@@ -18,7 +18,7 @@ router.get('/', auth, (request, response) => {
 
 router.post('/', auth, (request, response) => {
   const { connection } = request.body
-  console.log(connection)
+  console.log(request.body)
   if(!connection.owner_id || 
     !connection.artist_id ||
     connection.message === ""){
