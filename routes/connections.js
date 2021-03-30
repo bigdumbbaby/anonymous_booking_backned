@@ -47,25 +47,10 @@ router.post('/', auth, (request, response) => {
 router.put('/:id', (request,response) => {
   database('connection')
     .where({id: request.params.id})
-    // .update({is_approved: true})
+    .update({is_approved: true})
+    .returning('*')
     .then(data => {
-      // response.json(data)
-      Promise.all(() => {
-        return database('artist')
-          .select()
-          .where({id: data.artist_id})
-          .then(artist => {
-            console.log(artist)
-            return {
-              ...data,
-              artist
-            }
-          })   
-      })
-    })
-    .then((connection) => {
-      console.log(connection)
-      response.json(connection)
+      response.json(data)
     })
 })
 
