@@ -59,7 +59,7 @@ router.post('/checkForConnection', (request, response) => {
     .where({owner_id: owner_id, artist_id: artist_id})
     .then(output => {
       if(output.length > 0){
-        response.json(true)
+        response.json(output)
       } else {
         response.json(false)
       }
