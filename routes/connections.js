@@ -50,7 +50,13 @@ router.put('/:id', (request,response) => {
     .update({is_approved: true})
     .returning('*')
     .then(data => {
-      response.json(data)
+      // response.json(data)
+      database('artists')
+        .select()
+        .where({id: data.artist_id})
+        .then(artist => {
+          return response.json(data, artist)
+        })
     })
 })
 
