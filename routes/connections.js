@@ -44,6 +44,14 @@ router.post('/', auth, (request, response) => {
   }
 })
 
+router.put('/:id', (request,response) => {
+  database('connection')
+    .where({id: request.params.id})
+    .update({is_approved: true})
+    .returning('*')
+    .then(data => request.send(data))
+})
+
 router.post('/checkForConnection', (request, response) => {
   const {owner_id, artist_id} = request.body
   database('connection')
