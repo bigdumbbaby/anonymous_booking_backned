@@ -68,11 +68,15 @@ router.put('/:id', (request,response) => {
             data,
             artist
           }
+        }).catch((err) => {
+          console.error('inner', err)
         })
     })
     .then((connections) => {
       console.log(connections)
       response.json(connections)
+    }).catch((err) => {
+      console.error('outer', err)
     })
 })
 
