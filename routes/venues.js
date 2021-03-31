@@ -15,6 +15,13 @@ router.get('/', (request, response) => {
     .then(venues => response.send(venues))
 })
 
+router.get('/:id', (request,response) => {
+  database('venue')
+    .where({id: request.params.id})
+    .returning('*')
+    .then(data => response.json(data))
+}
+
 router.post('/', auth, (request, response) => {
   const { venue } = request.body
   if(venue.name === "" || 
