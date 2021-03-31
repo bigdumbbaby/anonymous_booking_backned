@@ -20,7 +20,7 @@ router.get('/:id', (request,response) => {
     .where({id: request.params.id})
     .returning('*')
     .then(data => response.json(data))
-}
+})
 
 router.post('/', auth, (request, response) => {
   const { venue } = request.body
